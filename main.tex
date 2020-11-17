@@ -1,0 +1,354 @@
+\documentclass{ctexart}
+\usepackage[
+    a4paper,
+    top=0.8in,
+    left=0.8in,
+    right=0.8in,
+    bottom=1in
+]{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{float}
+\usepackage{booktabs}
+\usepackage{amsthm}
+\usepackage{float}
+\usepackage{IEEEtrantools}
+\pagestyle{plain}
+
+\theoremstyle{definition}
+\newtheorem{definition}{定义}
+
+\theoremstyle{definition}
+\newtheorem{example}{例}
+
+\theoremstyle{plain}
+\newtheorem{prop}{命题}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{定理}
+
+\theoremstyle{plain}
+\newtheorem{lemma}{引理}
+
+\theoremstyle{definition}
+\newtheorem{property}{性质}
+
+\DeclareMathOperator*{\argminA}{\mathrm{arg} \,\mathrm{min}}
+
+\newcommand{\T}{\mathsf{T}}
+\newcommand{\nat}{\mathbb{N}^\star}
+
+\begin{document}
+
+\begin{theorem}[单调有界定理]
+    单调且有界的数列一定有极限．
+\end{theorem}
+
+\begin{theorem}[闭区间套定理]
+设$I_n=[a_n,b_n]\,(n\in\mathbb{N}^\star)$，并且$I_{n} \supset I_{n+1}, n \in \nat$，如果这一列区间的长度$|I_n|=b_n-a_n\to 0,\,(n\to\infty)$，那么交集$\displaystyle\bigcap_{n=1}^\infty I_n$含有唯一的一点．
+\end{theorem}
+
+\begin{theorem}[列紧性定理]
+从任意有界的数列中必可选出一个收敛的子列．
+\end{theorem}
+
+\begin{theorem}[柯西收敛定理]
+一个数列收敛的充分必要条件是它是柯西列．
+\end{theorem}
+
+\begin{theorem}[确界原理]
+非空的有上界的集合必有上确界；非空的有下界的集合必有下确界．
+\end{theorem}
+
+\begin{theorem}[紧致性定理]
+设$[a,b]$是一个有限闭区间，并且它有一个开覆盖$\{ I_\lambda \}$，那么从这个开区间族中必可选出有限个成员来，这有限个开区间所组成的族仍是$[a,b]$的开覆盖．
+\end{theorem}
+
+\begin{proof}
+$1 \implies 2$. 
+
+\noindent 由$I_n$是闭区间以及对任意$n \in \nat$都有$I_n \supset I_{n+1}$推出$a_n \leq a_{n+1}, b_{n} \geq b_{n+1}$，又根据$a_1 \leq a_n < b_n \leq b_1$推出数列$\{a_n\}, \{b_n\}$都有界，所以数列$\{a_n\}$和数列$\{b_n\}$都存在极限，分别记为$a$和$b$．
+
+\noindent 由于$a_n < b_n$，根据极限的保号性，得$a \leq b$，又根据数列$\{a_n\}, \{b_n\}$的单调性，得
+\begin{equation}
+    a_n < a \leq b < b_n
+\end{equation}
+对上述不等式做变形得
+\begin{equation}
+    0 < b - a < b_n - a < b_n - a_n
+\end{equation}
+有根据$b_n - a_n \to 0, \, (n \to \infty)$的事实得$b-a=0$，即$b=a$．这个$a$是唯一的，否则如果有$c\neq a$并且$a_n < c < b_n, \, (n \in \nat)$，那么可同理推出$\displaystyle \lim_{n\to\infty} a_n = \lim_{n\to\infty} b_n = c$，由于数列只可能存在唯一的极限，所以$c=a$，这与$c\neq a$的假设矛盾，所以不存在$c \neq a$对任意$n\in\nat$都满足$a_n<c<b_n$．
+
+\noindent 综上所述，我们得
+\begin{equation}
+    a \in \bigcap_{n=1}^\infty I_n
+\end{equation}
+并且$a$唯一．
+\end{proof}
+
+\begin{proof}
+$1 \implies 3$. 令
+\begin{equation}
+    % i_1 = \argminA_{i \in \nat} \, \{ \forall m \in \nat, a_i \geq a_m \}
+    i_1 = \argminA_{\substack{i \in \nat, \\ \forall m \in \nat, a_i \geq a_m}} \, i 
+\end{equation}
+再令
+\begin{equation}
+    i_{n+1} = \argminA_{\substack{i \in \nat \\ i > i_n \\ \forall m \in \nat, a_i \geq a_m}} \, i
+\end{equation}
+如果存在无限多个这样的$i_n$，那么$\{ a_{i_n}\}$可看做是$\{a_n\}$的一个子列并且它显然是单调递减的，由于$\{a_n\}$有界，所以它的任意子列都有界，所以$\{a_{i_n}\}$有界，由单调有界定理，子列$\{a_{i_n}\}$是收敛的．
+
+\noindent 如果只存在有限多个这样的$i_n$，记$i_M, \, M \in \nat$是所有这些$i_n$的最后一项，那么存在一个最小的$j_1 \in \nat$，使得$a_{i_m} < a_{j_1}$，并且还存在$j_2$，满足$j_2 \in \nat, j_2 > j_1$使得$a_{j_1} < a_{j_2}$，一定可以找到无穷多个这样的$j_n$，使得$a_{j_1} < a_{j_2} < a_{j_3} < \cdots$，于是按照这样的方法构造的$\{a_{j_n}\}$是$\{a_n \}$的一个递增子列，显然$\{a_{j_n}\}$有界，于是$\{a_{j_n}\}$收敛．
+\end{proof}
+
+\begin{proof}
+$3 \implies 4$.
+
+\noindent 先证必要性．设数列$\{a_n\}$的极限是$a$．于是按照极限的定义，对任意$\epsilon >0$，存在$N \in \nat$，使得当$n > N$时，有
+\begin{equation}
+    |a_n - a| \leq \frac{1}{2} \epsilon
+\end{equation}
+设$m \in \nat, m > n$，则当$n > N$时也有$m > N$，于是
+\begin{equation}
+    |a_m - a| \leq \frac{1}{2} \epsilon
+\end{equation}
+于是
+\begin{equation}
+    |a_n - a_m| \leq |a_n - a| + |a_m - a| \leq \frac{1}{2} \epsilon + \frac{1}{2} \epsilon < \epsilon
+\end{equation}
+于是必要性成立．
+
+\noindent 再证充分性．设$\{a_n\}$是一个柯西列．于是，对任意$\epsilon > 0$，都存在$N \in \nat$，使得当$n \geq N$时，对任意$p \in \nat$都有
+\begin{equation}
+    |a_{n+p} - a_n| < \epsilon
+\end{equation}
+取特殊的$\epsilon_0 = 1 > 0$，自然也存在$N_0 \in \nat$，使得对任意$p \in \nat$都有
+\begin{equation}
+    |a_{N_0+p} - a_{N_0}| < \epsilon_0 = 1
+    \label{ieq:hasrange}
+\end{equation}
+于是根据不等式(\ref{ieq:hasrange})易知数列$\{a_n\}$是有界的．有界数列必有收敛子列，可设$\{a_{i_n}\}$是数列$\{a_n\}$的一个收敛子列，设$\{a_{i_n}\}$的极限为$a$，我们来证$a$也是$\{a_n\}$的极限．由于$\{a_{i_n}\}$收敛，所以，对任意$\epsilon > 0$，都存在$N_1(\epsilon) \in \nat$，使得只要$n > N_1$，就有
+\begin{equation}
+    |a_{i_n}-a|<\frac{1}{2}\epsilon
+\end{equation}
+又由于$\{a_n\}$是柯西列，所以存在$N_2(\epsilon) \in \nat$，当$n > N_2$时有
+\begin{equation}
+    |a_{n}-a_{i_n}|<\frac{1}{2}\epsilon
+\end{equation}
+于是
+\begin{equation}
+    |a_n - a| \leq |a_{i_n}-a|+|a_n-a_{i_n}| < \frac{1}{2}\epsilon+\frac{1}{2}\epsilon = \epsilon
+\end{equation}
+从而$\{ a_n \}$收敛于$a$．充分性得证．
+\end{proof}
+\begin{proof}
+$2 \implies 5$.
+
+\noindent 设$c_1$是集合$\{a_n:n\in\nat\}$的一个上界，任取$b_1 \in \{a_n:n\in\nat\}$，令$I_1 = [a_1, b_1]$成为一个闭区间，首先考察闭区间$[\displaystyle\frac{b_1+c_1}{2}, c_1]$是否有$\{a_n\}$中的元素，如果有，那么令$b_2 = \displaystyle \frac{b_1+c_1}{2}, c_2 = c_1$，否则闭区间$[b_1, \displaystyle\frac{b_1+c_1}{2}]$中就一定有$\{a_n\}$的元素，那么就令$b_2=b_1, c_2=\displaystyle\frac{b_1+c_1}{2}$，最后令$I_2 = [a_2, b_2]$．从闭区间$I_n$按类似的步骤构造闭区间$I_{n+1}$：首先考察闭区间$[\displaystyle\frac{b_n+c_n}{2},c_n]$中是否有$\{a_n\}$中的元素，如果有，则令$b_{n+1}=\displaystyle\frac{b_n+c_n}{2}, c_{n+1}=c_n$，否则令$b_{n+1}=b_n,c_{n+1}=\displaystyle\frac{b_n+c_n}{2}$，并且令$I_{n+1} = [b_{n+1},c_{n+1}]$．易知$I_n \supset I_{n+1}, \forall n \in \nat$，并且随着$n\to\infty$，有$|I_n| = |I_1|\displaystyle\frac{1}{2^{n-1}} \to 0$．由闭区间套定理，存在唯一的数$b$满足$b \in \displaystyle\bigcap_{n=1}^\infty I_n$，并且有$\displaystyle\lim_{n\to\infty}b_n=\lim_{n\to\infty}c_n=b$．
+
+\noindent 我们来证明这个$b$正是$\{a_n\}$的上确界，首先要证明的是$b$是$\{a_n\}$的一个上界．假如存在$n_0 \in \nat$使得$a_{n_0} \in \{a_n\}$并且$a_{n_0} > b$，那么令$\epsilon_0 = a_{n_0}-b$，于是存在$N_0 \in \nat$，使得当$n > N_0$时，
+\begin{equation}
+    |c_n - b| = c_n - b < \epsilon_0
+\end{equation}
+也就是
+\begin{equation}
+    c_n - b < a_{n_0} - b
+\end{equation}
+也就是
+\begin{equation}
+    c_n < a_{n_0}
+\end{equation}
+这显然是不可能的，因为由这一系列闭区间$I_1,I_2,I_3,\cdots$的构造过程知，不可能存在$\{a_n\}$中的任何一个元素大于$c_n$．所以，对任意$x \in \{a_n\}$，都有$x \leq b$，从而$b$是$\{a_n\}$的一个上界．
+
+\noindent 现在要证明$b$是$\{a_n\}$的上确界．由于$b$同时是数列$\{b_n\}$与数列$\{c_n\}$的极限，所以，对任意正数$\epsilon >0$，存在$N_1 \in \nat$，使得当$n > N_1$时，有
+\begin{equation}
+    |b_n-b| = b-b_n < \frac{1}{2}\epsilon
+\end{equation}
+同时，也存在$N_2 \in \nat$，使得当$n >N_2$时，有
+\begin{equation}
+    |c_n-b|=c_n-b < \frac{1}{2}\epsilon
+\end{equation}
+由于对任意$n \in \nat$，闭区间$I_n$都含有$\{a_n\}$中的元素，所以，存在$x_\epsilon \in \{a_n\}$，满足$x_\epsilon \in I_n$，也就是
+\begin{equation}
+    b_n < x_\epsilon < c_n
+\end{equation}
+于是当$n > \max \{N_1, N_2\}$时$b -b_n < \displaystyle\frac{1}{2}\epsilon$和$c_n-b<\displaystyle\frac{1}{2}\epsilon$同时成立，并且据此可得
+\begin{equation}
+    |x_\epsilon - b| \leq |c_n-b_n|=c_n-b_n=b-b_n+c_n-b<\frac{1}{2}\epsilon+\frac{1}{2}\epsilon = \epsilon
+\end{equation}
+也就是
+\begin{equation}
+    b - x_\epsilon < \epsilon
+\end{equation}
+这就证明了$b$就是$\{a_n\}$的上确界．可用类似的二分法，从$\{a_n\}$的任何一个下界和$\{a_n\}$的任何一个元素开始，构造一系列的闭区间$I_1,I_2,I_3,\cdots$构成一个闭区间套，然后用类似的推理证明该闭区间套的唯一交点就是下确界．
+\end{proof}
+
+\begin{proof}
+$2 \implies 6$. 设$\{I_\lambda : \lambda \in \Lambda \}$是闭区间$[a,b]$的一个开覆盖，于是对任意$x \in [a,b]$，都存在$\lambda(x) \in \Lambda$，使得$x \in I_{\lambda(x)}$．
+
+\noindent 采用反证法，设闭区间$[a,b]$不能够被$\{I_\lambda\}$的有限个开区间组成的开区间簇所覆盖，也就是，任意有限多个$\{I_\lambda\}$中的开区间组成的并集都不能够覆盖$[a,b]$．也就是说，假如$\Lambda_1$是$\Lambda$的一个有限子集，那么一定存在$x_0 \in \{ a_n \}$，满足$x_0 \not\in \displaystyle\bigcup_{\lambda \in \Lambda_1} I_\lambda$．
+
+\noindent 令$a_1 = a, b_1 = b$，令$S_1 = [a_1,b_1]$成为一个闭区间，显然$S_1$不能够被$\{I_\lambda\}$中有限多个开集所覆盖，令$S_2(A) = \displaystyle [a_1, \frac{a_1+b_1}{2}]$，再令$S_2(B) = [\displaystyle\frac{a_1+b_2}{2},b_1]$，在$S_2(A)$和$S_2(B)$这两个闭区间中，必定有一个不能够被$\{I_\lambda\}$的有限个开区间所覆盖，如果$S_2(A)$不能够被$\{I_\lambda\}$有限个开区间所覆盖，就令$a_2 = a_1, b_2 = \displaystyle\frac{a_1+a_2}{2}$，否则令$a_2=\displaystyle\frac{a_1+a_2}{2}, b_2=b_1$，然后令$S_2 = [a_2,b_2]$．显然$S_2$不能够被$\{I_\lambda\}$中有限多个开区间所覆盖．对于任意的$n \in \nat$，按照这样的方法从$S_n$构造出$S_{n+1}$：如果$[a_n,\displaystyle\frac{a_n+b_n}{2}]$不能够被$\{I_\lambda\}$有限个开区间覆盖，就令$a_{n+1}=a_n, b_{n+1} =\displaystyle\frac{a_n+b_n}{2}$，否则令$a_{n+1}=\displaystyle\frac{a_n+b_n}{2},b_{n+1}=b_n$，然后令$S_{n+1}=[a_{n+1},b_{n+1}]$．易知，按照这种方法构造出的一系列闭区间$S_1,S_2,S_3,\cdots$中的每一个都不能够被$\{I_\lambda\}$中的有限个开区间所覆盖．并且，当$n \to \infty$时，第$n$个闭区间$S_n$的长度$|S_n| = |S_1|\displaystyle\frac{1}{2^{n-1}}\to 0$，以及，显然，对所有$n \in \nat$，都有$a_n \leq a_{n+1}$和$b_{n+1} \leq b_n$，从而对每一个$n \in \nat$都有$S_n \supset S_{n+1}$．那么按照闭区间套定理就有$\displaystyle \lim_{n\to\infty} a_n = \lim_{n\to\infty}b_n = \eta$，以及$\eta \in \displaystyle\bigcap_{n=1}^\infty S_n$．
+
+\noindent 显然$\eta \in [a,b]$，于是存在$\lambda_1 \in \Lambda$，使得$\eta \in I_{\lambda_1}$，设$I_{\lambda_1} = (\alpha,\beta)$，令$\epsilon_0 = \min \{\beta-\eta,\eta-\alpha \}$，于是存在$N_1 \in \nat$，使得当$n > N_1$时，
+\begin{equation}
+    |a_n - \eta| = \eta - a_n < \epsilon_0
+\end{equation}
+以及存在$N_2 \in \nat$使得当$n > N_2$时
+\begin{equation}
+    |b_n - \eta| = b_n - \eta < \epsilon_0
+\end{equation}
+于是当$n > \max \{N_1, N_2\}$时，同时有
+\begin{equation}
+    \eta - a_n < \epsilon_0 \leq \eta - \alpha, \; b_n - \eta < \epsilon_0 \leq \beta - \eta
+\end{equation}
+整理得
+\begin{equation}
+    \alpha < a_n, \; b_n < \beta
+\end{equation}
+这说明$S_n = [a_n, b_n] \subset (\alpha, \beta) = I_{\lambda_1}$，也就是$S_n$被$\{I_\lambda\}$中有限多个开区间所覆盖，然而根据$S_n$的构造过程我们知道任何一个$S_n$都不被$\{I_\lambda\}$中的有限多个开区间覆盖，于是导出了矛盾．
+\end{proof}
+\begin{proof}
+$3 \implies 1$.
+
+\noindent 设$\{a_n\}$是一个单调数列，并且设$l$是它的一个下界，$u$是它的一个上界．采用反证法，我们假设结论不成立，也就是假设$\{a_n\}$的极限不存在．$\{a_n\}$的极限不存在包括两种情形：
+
+\noindent 情形１：$\{a_n\}$趋于无穷，显然这是不可能的，因为这与$\{a_n\}$是有界的条件相矛盾．
+
+\noindent 情形２：$\{a_n\}$不趋于无穷，于是$\{a_n\}$有界，于是可从$\{a_n\}$中找出一个收敛子列，记为$\{a_{i_n}\}$，但是由于$\{a_n\}$的极限不存在，也就是，存在$\epsilon_0 > 0$，对任意$x \in \mathbb{R}$，对任意$N_1 \in \nat$，对任意$n > N$，都有
+\begin{equation}
+    |a_n - x| \geq \epsilon_0
+\end{equation}
+但是由于$\{a_{i_n}\}$收敛，设$\{a_{i_n}\}$的极限是$a$，所以对任意$\epsilon > 0$，存在$N_2 \in \nat$，使得当$n > N_2$时，有
+\begin{equation}
+    |a_{i_n} - a| < \epsilon
+    \label{ieq:case2}
+\end{equation}
+令$x = a$，由于不等式(\ref{ieq:case2})对任意$n$都成立，所以
+\begin{equation}
+    |a_{i_n} - a|\geq \epsilon_0
+\end{equation}
+矛盾．
+\end{proof}
+
+\begin{proof}
+$5 \implies 1$.
+
+\noindent 设$\{a_n\}$单调且有界，设$\{a_n\}$是单调递增的，并且根据确界原理，$\{a_n\}$有上确界，设$l$是$\{a_n\}$的上确界．
+
+\noindent 从而对任意$\epsilon > 0$，存在$\{a_n\}$中的元素$x \in \{a_n\}$，不妨记$x$为$x=a_{N(\epsilon)}, N(\epsilon) \in \nat$，使得
+\begin{equation}
+    l - a_{N(\epsilon)} < \epsilon
+\end{equation}
+根据$\{a_n\}$的单调性，我们知道，当$n > N(\epsilon)$时，会有$a_n > a_{N(\epsilon)}$，也就是
+\begin{equation}
+    l - a_n < l - a_{N(\epsilon)} < \epsilon
+\end{equation}
+也就是
+\begin{equation}
+    |a_n - l| < \epsilon
+\end{equation}
+这就证明了$l$是$\{a_n\}$的极限．从而$\{a_n\}$是收敛的．
+\end{proof}
+
+\begin{proof}
+$2 \implies 3$.
+
+\noindent 设$\{a_n\}$是一个有界数列，如果说$\{a_n\}$中只有有限多个不同的项，那么命题显然成立，证明到此结束；否则就：我们假设$\{a_n\}$中有无穷多个不相等的项，也就是说：集合$\{a_n:n\in\nat\}$中有无穷多个元素．
+
+\noindent 取$b_1$为$\{a_n\}$的一个下界，取$c_1$为$\{a_n\}$的一个上界．于是闭区间$I_1 = [b_1,c_1]$包含了$\{a_n\}$的全部元素，也就是$\forall n \in \nat, a_n \in I_1$．如果闭区间$[b_1,\displaystyle\frac{b_1+c_1}{2}]$包含了$\{a_n\}$中无穷多个元素，那么就令$b_2 = b_1,c_2=\displaystyle\frac{b_1+c_1}{2}]$，否则闭区间$[\displaystyle\frac{b_1+c_1}{2},c_1]$就一定包含了$\{a_n\}$中无穷多个元素，那么令$b_2=\displaystyle\frac{b_1+c_1}{2},c_2=c_1$，然后令$I_2=[b_2,c_2]$；按照类似的方法从闭区间$I_n$构造$I_{n+1}$：检查闭区间$[b_n,\displaystyle\frac{b_n+c_n}{2}]$是否包含$\{a_n\}$中的无穷多个元素，如果是那么就令$b_{n+1}=b_n,c_{n+1}=\displaystyle\frac{b_n+c_n}{2}$，否则令$b_{n+1}=\displaystyle\frac{b_n+c_n}{2},c_{n+1}=c_n$，再令$I_{n+1}=[b_{n+1},c_{n+1}]$．容易证明，这一系列闭区间$I_1,I_2,I_3,\cdots$具有这些性质：１）$I_n \supset I_{n-1}, \forall n \in \nat$，２）第$n$个这样的闭区间的长度随着$n$趋于无穷而趋于零，也就是当$n\to\infty$时$|I_n|=|I_1|\displaystyle\frac{1}{2^{n-1}}\to 0$．３）每一个$I_n, n\in\nat$都包含了$\{a_n\}$中无穷多个元素．
+
+\noindent 为了构造出一个收敛的子列，我们令
+\begin{equation}
+    i_1 = \argminA_{i \in \nat, a_i \in I_1} \, \{ i \}
+\end{equation}
+换句话说，$i_1$表示所有能够使得$a_{i} \in I_1$成立的$i \in \nat$中的最小的那一个．对于$m \in \nat, m \geq 2$，我们令
+\begin{equation}
+    i_m = \argminA_{\substack{i \in \nat, \\ a_i \in I_m, \\ i > i_{m-1} }} \, \{ i \}
+\end{equation}
+也就是说，$i_m$总是从$i_{m-1}+1$开始寻找，直到找到某个$a_{i_m} \in I_m$．由于每个$I_m$中都有无穷多个$\{a_n\}$的元素，所以这样的$i_1, i_2, i_3, \cdots$总是可以找到的．
+
+\noindent 显然，$1 \leq i_1 < i_2 < i_3 < \cdots$，因此$\{a_{i_n}\}$是$\{a_n\}$的一个子列，下面我们就要来证明这个$\{a_{i_n}\}$收敛．从$i_m$的构造过程可知，对每一个$m \in \nat$，都有
+\begin{equation}
+    a_{i_m} \in I_m
+\end{equation}
+由于$I_m$是一个闭区间，$I_m = [b_m, c_m]$，所以上式写成
+\begin{equation}
+    b_m \leq a_{i_m} \leq c_m
+\end{equation}
+由于所有的$I_m$构成一个闭区间套$\{ I_m: m \in \nat \}$，所以，根据闭区间套定理，存在唯一的数$b$，使得
+\begin{equation}
+    \lim_{m\to\infty} b_m = \lim_{m\to\infty} c_m = b
+\end{equation}
+并且
+\begin{equation}
+    b \in \bigcap_{m=1}^\infty I_m
+\end{equation}
+所以有$b_m \leq b \leq c_m$，对任意$m \in \nat$．下面我们要证明的是这个$b$就是$\{a_{i_m}\}$的极限．因为$b = \displaystyle\lim_{n\to\infty}b_n=\lim_{n\to\infty}c_n$，所以，对任意$\epsilon > 0$，存在$M_1 \in \nat$，使得当$m \geq M_1$时
+\begin{equation}
+    a_{i_m} - b_m < \frac{1}{2}\epsilon
+\end{equation}
+并且，存在$M_2 \in \nat$，使得当$m \geq M_2$时
+\begin{equation}
+    c_m - a_{i_m} < \frac{1}{2}\epsilon
+\end{equation}
+那么当$m \geq \max \{ M_1, M_2 \}$时，上述两个不等式会同时成立，利用这个性质，得到
+\begin{equation}
+    |a_{i_m} - b| < c_m - b_m = c_m - a_{i_m} + a_{i_m} - b_m < \frac{1}{2}\epsilon+\frac{1}{2}\epsilon = \epsilon
+\end{equation}
+这说明$\{a_{i_m}\}$的极限是$b$，因此$\{a_{i_m}\}$收敛，因此$\{a_n\}$存在收敛子列．
+\end{proof}
+
+\begin{proof}
+$4 \implies 2$.
+设$I_n = [a_n,b_n]\,(n \in \nat)$，并且当$n\to\infty$时，$I_n \supset I_{n+1}, \forall n \in \nat$，$|I_n| = b_n - a_n \to 0$，我们要来证明存在唯一一点$a$属于交集$\displaystyle\bigcap_{n=1}^\infty I_n$．
+
+\noindent 先证存在性．
+
+\noindent 由于$b_n - a_n \to 0$（当$n\to\infty$），所以，对任意$\epsilon > 0$，存在$N \in \nat$，当$n \geq N$的时候，有
+\begin{equation}
+    b_n - a_n < \epsilon
+\end{equation}
+设$p \in \nat$是任意正整数，那么由于$I_n \supset I_{n+1}, \forall n \in \nat$，所以，显然有$I_n \supset I_{n+p}$，由于$I_n, I_{n+p}$都是闭区间，不妨设$I_{n+p} = [a_{n+p},b_{n+p}]$，要使得$I_n \supset I_{n+p}$，就必须要有$a_n \leq a_{n+p} < b_{n+p} \leq b_n$，由此可得
+\begin{equation}
+    |a_{n+p} - a_n | = a_{n+p} - a_n < b_n - a_n < \epsilon
+\end{equation}
+以及
+\begin{equation}
+    |b_{n+p} - b_n | = b_n - b_{n+p} < b_n - a_n < \epsilon
+\end{equation}
+由柯西列的定义可知数列$\{a_n\}$和$\{b_n\}$都是柯西列，因此数列$\{a_n\}$和数列$\{b_n\}$都收敛．又因为$b_n - a_n < \epsilon$，所以$\displaystyle\lim_{n\to\infty}(b_n-a_n)=0$，所以数列$\{a_n\}$和数列$\{b_n\}$都收敛到同一个极限，不妨记为$a$．
+
+\noindent 由于$I_n \supset I_{n+1},\forall n \in \nat$，所以$\{a_n\}$是单调递增的，并且$\{b_n\}$是单调递减的，又因为$\displaystyle\lim_{n\to\infty}a_n=a$和$\displaystyle\lim_{n\to\infty}b_n=a$，所以，对任意$n \in \nat$恒有$a_n < a < b_n$，如此一来就证明了$\{a_n\}$和$\{b_n\}$收敛，并且它们的共同极限$a$是这一系列闭区间的交集的公共元素．也就是$a \in \displaystyle\bigcap_{n=1}^\infty I_n$．于是存在性得证．
+
+\noindent 再证唯一性．
+
+\noindent 设存在$c \in \mathbb{R}$满足$c \in \displaystyle\bigcap_{n=1}^\infty I_n$并且$c \neq a$．不妨设$c < a$，于是令$\epsilon_0 = a - c$，那么$\epsilon_0 > 0$，于是存在$N(\epsilon_0) \in \nat$，使得当$n \geq N(\epsilon_0)$的时候，
+\begin{equation}
+    a - a_n < \epsilon_0 = a - c
+\end{equation}
+推出$a_n > c$，但是由于$c \in \displaystyle\bigcap_{n=1}^\infty I_n$，所以这是不可能的．所以一定不存在这样的$c$既是这些$I_n$的公共元素又满足$c \neq a$．这就证明了唯一性．
+\end{proof}
+
+\begin{proof}
+$4 \implies 1$.
+
+\noindent 设$\{a_n\}$是一个单调递增且有界的数列，我们要来证明这样的$\{a_n\}$的极限一定存在．
+
+\noindent 首先要证明$\{a_n\}$是一个柯西列．采用反证法，假设$\{a_n\}$不是柯西列．那么存在$\epsilon_0 > 0$，对任意$N \in \nat$，对任意$n > N, p \in \nat$，都有
+\begin{equation}
+    a_{n+p} - a_n \geq \epsilon_0
+\end{equation}
+设$u$是$\{a_n\}$的一个上界，令$t = \lceil (u - a_1) / \epsilon_0 \rceil$，于是
+\begin{equation}
+    a_{t+1} \geq a_{1} + t \epsilon_0 \geq a_1 + \frac{u-a_1}{\epsilon_0} \epsilon_0 = u
+\end{equation}
+然而这是不可能的，因为$u$是$\{a_n\}$的一个上界，矛盾．于是对任意$\epsilon > 0$，必定都存在$N(\epsilon) \in \nat$，使得当$n \geq N(\epsilon)$时，对任意$p \in \nat$都有
+\begin{equation}
+    a_{n+p} - a_n < \epsilon
+\end{equation}
+因此$\{a_n\}$是一个柯西列，根据柯西收敛准则的充分性，$\{a_n\}$收敛．
+
+\end{proof}
+
+\end{document}
